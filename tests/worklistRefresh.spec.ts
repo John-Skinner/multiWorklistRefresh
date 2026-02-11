@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { chromium } from '@playwright/test';
 import * as utils from './utils'
-import {getPastDates} from "./utils";
+import {getPastDates,selFeb} from "./utils";
 async function worklistRefresh(ith) {
     const browser = await chromium.launch();
 
@@ -36,7 +36,7 @@ async function worklistRefresh(ith) {
 
     await utils.login(page,userIds[randIndex],pw);
     let startListTime=Date.now();
-    await getPastDates(page,1);
+    await selFeb(page);
     let endListTime=Date.now();
     console.log(`time secs: ${(endListTime-startListTime-5000)/1000}`) // subtract 5000 from waitForTimeout in getPastDates
     await page.waitForTimeout(1000);
@@ -52,7 +52,7 @@ test( 'test',async () => {
 
     console.log('hi');
     let refreshList = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 30; i++) {
         refreshList.push(worklistRefresh(i));
     }
     await Promise.all(refreshList);

@@ -37,7 +37,7 @@ export const selectStudy = async (page, studyName,isLongitudinal=false) => {
     }
     await page.waitForTimeout(5000);
 }
-export const selStudyDatesCalendar = async (page, numberYearsBack) => {
+export const selStudyDatesCalendar = async (page, numberYearsBack,numberMon) => {
     await page.getByText('from:').click();
     await page.locator('body').press('Tab');
     await page.locator('body').click();
@@ -49,6 +49,18 @@ export const selStudyDatesCalendar = async (page, numberYearsBack) => {
     calendar = await page.getByRole('button', {name: 'Previous year'});
     await page.getByRole('button', {name: '1'}).filter({hasText: '15'}).click();
     await page.getByRole('button', {name: 'Apply Filter'}).click();
+
+}
+export const selFeb = async (page) => {
+    await page.getByText('from:').click();
+    await page.locator('body').press('Tab');
+    await page.locator('body').click();
+    await page.getByTitle('From Date').click();
+    await page.waitForTimeout(1000);
+    await page.getByRole('button',{name: '2/2/2026',exact:true}).click();
+    await page.getByRole('button', { name: 'Apply Filter' }).click();
+
+
 
 }
 export const getPastDates = async (page, pastIndex) => {
